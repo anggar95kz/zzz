@@ -30,7 +30,7 @@ function getElevation(lat, lng, apiKey) {
     map.on('mousemove', function (e) {
       var lat = e.latlng.lat.toFixed(4);
       var lng = e.latlng.lng.toFixed(4);
-      var mapboxApiKey = 'sk.eyJ1IjoiYW5nZ2FyOTUiLCJhIjoiY2xwYjliZGgyMGVmNzJxcGJjanNxZmNmMyJ9.aQQ-ojygkKQpYw7fTubAcA';
+      var mapboxApiKey = '';
       var elevation = getElevation(lat, lng, mapboxApiKey);
       
     });
