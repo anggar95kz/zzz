@@ -133,6 +133,10 @@ $_SESSION['csrf_token'] = $csrfToken;
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
+		if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    die ("CSRF error");
+	}
+	else {
         $pdo = new PDO('sqlite:testdb.sqlite');
         $stmt = $pdo->prepare("SELECT * FROM sysuser WHERE login = :uname AND password = :pwd");
         $stmt->execute(array(':uname' => $_POST['uname'], ':pwd' => $_POST['pwd']));
@@ -148,7 +152,8 @@ echo "</script>";
             echo "Логин или пароль не верны";
 		
         }
-    } catch (PDOException $e) {
+    } 
+	}catch (PDOException $e) {
         echo $e->getMessage();  // 如果有错误就输出错误信息
     }
 }
